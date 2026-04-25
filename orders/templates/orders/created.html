@@ -1,0 +1,12 @@
+{% extends "shop/base.html" %}
+
+{% block title %}Order Confirmed — Okstal{% endblock %}
+
+{% block content %}
+<div class="text-center mt-5">
+    <h2>Thank you for your order!</h2>
+    <p class="text-muted">Your order number is <strong>#{{ order.id }}</strong></p>
+    <p>We will send a confirmation to <strong>{{ order.email }}</strong></p>
+    <a href="{% url 'shop:product_list' %}" class="btn btn-dark mt-3">Continue Shopping</a>
+</div>
+{% endblock %}

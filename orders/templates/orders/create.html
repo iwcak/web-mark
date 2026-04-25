@@ -1,0 +1,38 @@
+{% extends "shop/base.html" %}
+
+{% block title %}Checkout — Okstal{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="mb-4">Checkout</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">{{ form.first_name.label_tag }}{{ form.first_name }}{{ form.first_name.errors }}</div>
+            <div class="mb-3">{{ form.last_name.label_tag }}{{ form.last_name }}{{ form.last_name.errors }}</div>
+            <div class="mb-3">{{ form.email.label_tag }}{{ form.email }}{{ form.email.errors }}</div>
+            <div class="mb-3">{{ form.address.label_tag }}{{ form.address }}{{ form.address.errors }}</div>
+            <div class="mb-3">{{ form.city.label_tag }}{{ form.city }}{{ form.city.errors }}</div>
+            <button type="submit" class="btn btn-dark w-100">Place Order</button>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <h4 class="mb-3">Your Order</h4>
+        <table class="table">
+            <thead>
+                <tr><th>Product</th><th>Qty</th><th>Price</th></tr>
+            </thead>
+            <tbody>
+                {% for item in cart %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>${{ item.total_price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h5 class="text-end">Total: ${{ cart.get_total_price }}</h5>
+    </div>
+</div>
+{% endblock %}
